@@ -1,0 +1,16 @@
+server {
+  root /var/www/html;
+  index index.php;
+  
+  server_name forscope.ltd www.forscope.ltd;
+  
+  location / {
+                try_files $uri $uri/ /index.php?$query_string;
+    }
+  
+  location ~ \.php$ {
+    include fastcgi_params;
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+    }
+}
