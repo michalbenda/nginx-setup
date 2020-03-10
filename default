@@ -1,16 +1,23 @@
 server {
   root /var/www/html;
   index index.php;
-  
-  server_name forscope.ltd www.forscope.ltd;
-  
-  location / {
-                try_files $uri $uri/ /index.php?$query_string;
-    }
-  
+
+  server_name software-deals.ltd new.software-deals.ltd www.software-deals.ltd;
+
   location ~ \.php$ {
     include fastcgi_params;
-        include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
-    }
+    include snippets/fastcgi-php.conf;
+    fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+  }
+
+  location ~ \.(js|css|png|jpg|jpeg|gif|svg|ico)$ {
+    expires 30d;
+    add_header Cache-Control "public, no-transform";
+  }
+
+  location / {
+    try_files $uri $uri/ /index.php?$query_string;
+  }
+
+
 }
