@@ -13,6 +13,7 @@ server {
   location ~ \.(js|css|png|jpg|jpeg|gif|svg|ico)$ {
     expires 30d;
     add_header Cache-Control "public, no-transform";
+    try_files $uri $uri/ /index.php?$query_string;
   }
 
   location / {
